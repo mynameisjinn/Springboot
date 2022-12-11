@@ -4,7 +4,7 @@ public class Main {
 
     private final UserService userService;
 
-    public Main(UserService userService){
+    public Main(UserService userService) {
         this.userService = userService;
     }
 
@@ -17,9 +17,7 @@ public class Main {
 
     public static void main(String[] args){
         UserService userService = UserServiceImpl.getInstance();
-
         Main main = new Main(userService);
         main.run();
-
     }
 }
