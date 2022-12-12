@@ -9,19 +9,19 @@
         <table>
             <tr>
                 <td>상품코드</td>
-                <td></td>
+                <td th:text="${productDto.productCode}"></td>
             </tr>
             <tr>
                 <td>상품명</td>
-                <td></td>
+                <td th:text="${productDto.productName}"></td>
             </tr>
             <tr>
                 <td>가격</td>
-                <td></td>
+                <td th:text="${productDto.price}"></td>
             </tr>
             <tr>
-                <td>상품 코드</td>
-                <td></td>
+                <td>수량</td>
+                <td th:text="${productDto.stock}"></td>
             </tr>
         </table>
 </body>

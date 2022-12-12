@@ -2,9 +2,11 @@ package com.study.springboothyejin.web.controller;
 
 import com.study.springboothyejin.web.dto.ProductDto;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,8 +43,21 @@ public class ProductTestController {
 //    }
 
         @PostMapping("/api/product")
-        public String registerProduct(ProductDto productDto) {
+        public String registerProduct(Model model, ProductDto productDto) {
+            model.addAttribute("productDto", productDto);
             System.out.println(productDto);
             return "product/product_view";
-    }
+        }
+
+        @GetMapping("/product/addition2")
+        public String loadAddition2(){
+            return "product/product_add2";
+        }
+
+        @ResponseBody
+        @PostMapping("/api/product/2")
+        public String registerProduct(ProductDto productDto){
+            System.out.println(productDto);
+            return productDto.toString();
+        }
 }
