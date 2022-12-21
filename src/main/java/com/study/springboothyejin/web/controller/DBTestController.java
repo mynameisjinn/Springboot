@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/api/db/test")
 public class DBTestController {
@@ -16,8 +18,8 @@ public class DBTestController {
 
     @PostMapping("/user")
     public ResponseEntity<?> createUser(@RequestBody UserDto userDto){
-        userService.addUser(userDto);
-        return ResponseEntity.created(null).body(true);
+        int userId = userService.addUser(userDto);
+        return ResponseEntity.created(URI.create("/api/db/test/user/"+userId)).body(userDto);
     }
 
     @GetMapping("/user/{userId}")
