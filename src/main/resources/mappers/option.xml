@@ -6,7 +6,7 @@
     <insert id="saveCategory" parameterType="com.study.springboothyejin.web.dto.CategoryDto"
             useGeneratedKeys="true" keyProperty="categoryId">
         insert into category_mst
-        values(0, #{category_name})
+        values(0, #{categoryName})
     </insert>
     <select id="getCategories" resultType="com.study.springboothyejin.web.dto.CategoryDto">
         select
@@ -15,20 +15,20 @@
         from
             category_mst
     </select>
-    <update id="modifyCategoriy" parameterType="com.study.springboothyejin.web.dto.CategoryDto">
+    <update id="modifyCategory" parameterType="com.study.springboothyejin.web.dto.CategoryDto">
         update category_mst
         <trim prefix="set" suffixOverrides=",">
             <if test="categoryName != null">
                 category_name = #{categoryName},
             </if>
-            <if test="categoryName != null">
+            <if test="categoryOpt1 != null">
                 category_opt1 = #{categoryOpt1},
             </if>
-            <if test="categoryName != null">
+            <if test="categoryOpt2 != null">
                 category_opt2 = #{categoryOpt2},
             </if>
         </trim>
         where
-            category_id as categoryId = #{categoryId}
+            category_id = #{categoryId}
     </update>
 </mapper>
