@@ -52,6 +52,10 @@
             box-shadow: 0 0 10px 1px #dbdbdb;
         }
 
+        .success{
+            border: 3px solid #00dd4d;
+        }
+
         .error-msg{
             color: rgb(225, 73, 23);
             font-size: 11px;
@@ -133,18 +137,24 @@
         }
 
         duplicateUsername(username) {
+            const usernameInput = document.querySelectorAll(".register-inputs")[0];
+            const usernameError = document.querySelectorAll(".error-msg")[0];
+
             $.ajax({
                 async: false,
                 type: "GET",
                 url: "/api/account/username",
-                contentType: "application/json",
-                data: JSON.stringify({"username": username}),
+                data: {"username": username},
                 dataType: "json",
                 success: (response) => {
+                    usernameInput.classList.add("success");
+                    usernameError.textContent = "";
 
                 },
                 error: (errorResponse) => {
-
+                    console.log(errorResponse);
+                    usernameInput.classList.remove("success");
+                    usernameError.textContent = errorResponse.responseJSON.data.duplicate;
                 }
             });
         }
@@ -168,10 +178,9 @@
 
         }
 
-        window.onlodad = () => {
+        window.onload = () => {
             RegisterService.getInstance().addEventToUsernameInput()
         }
-
 
     </script>
 </body>
