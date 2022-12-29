@@ -6,10 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.ConstraintViolationException;
-import java.util.HashMap;
-import java.util.Map;
-
 @RestControllerAdvice
 public class AccountApiControllerAdvice {
 
@@ -18,10 +14,4 @@ public class AccountApiControllerAdvice {
         return ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(), e.getErrorMap()));
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<?> validationError(ConstraintViolationException e){
-        Map<String, String> errorMap = new HashMap<>();
-
-        return ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(), errorMap));
-    }
 }
