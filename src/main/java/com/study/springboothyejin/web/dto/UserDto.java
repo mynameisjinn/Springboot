@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class UserDto {
     private int userId;
+    @NotBlank
     private String username;
     private String password;
     private String name;

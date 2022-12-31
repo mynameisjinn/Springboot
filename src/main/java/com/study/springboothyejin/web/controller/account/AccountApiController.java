@@ -5,11 +5,14 @@ import com.study.springboothyejin.web.dto.CMRespDto;
 import com.study.springboothyejin.web.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import java.net.URI;
 
 @RestController
+@Validated
 @RequestMapping("/api/account")
 public class AccountApiController {
 
@@ -17,7 +20,7 @@ public class AccountApiController {
     private UserService userService;
 
     @GetMapping("/username")
-    public ResponseEntity<?> duplicateUsername(String username) {
+    public ResponseEntity<?> duplicateUsername(@NotBlank(message = "사용자 이름을 입력하세요.") String username) {
         userService.duplicateUsername(username);
         return ResponseEntity.ok().body(new CMRespDto<>("가입 가능한 사용자이름", true));
     }
