@@ -28,35 +28,12 @@ public class AccountApiController {
 
     @GetMapping("/username")
     public ResponseEntity<?> duplicateUsername(@Valid UsernameDto usernameDto, BindingResult bindingResult){
-        if(bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<String, String>();
-            bindingResult.getFieldErrors().forEach(error ->{
-                errorMap.put(error.getField(), error.getDefaultMessage());
-            });
-            errorMap.forEach((k, v) -> {
-                System.out.println(k + ": " + v);
-            });
-
-            throw new CustomValidException(errorMap);
-        }
         userService.duplicateUsername(usernameDto.getUsername());
         return ResponseEntity.ok().body(new CMRespDto<>("가입 가능한 사용자이름", true));
     }
 
     @PostMapping("/user")
     public ResponseEntity<?> register(@RequestBody @Valid UserDto userDto, BindingResult bindingResult) {
-//        System.out.println(userDto);
-//        System.out.println(bindingResult.getFieldErrors());
-        if(bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<String, String>();
-            bindingResult.getFieldErrors().forEach(error ->{
-               errorMap.put(error.getField(), error.getDefaultMessage());
-            });
-            errorMap.forEach((k, v) -> {
-                System.out.println(k + ": " + v);
-            });
-            throw new CustomValidException(errorMap);
-        }
         return ResponseEntity
                 .created(URI.create("/account/login"))
                 .body(new CMRespDto<>("회원가입 완료", null));
